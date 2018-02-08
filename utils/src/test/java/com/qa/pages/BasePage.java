@@ -32,7 +32,15 @@ public class BasePage {
         inputField.clear();
     }
 
-    public void insertIntoInput(WebElement input, String value)throws Exception
+    public boolean isWebElementPresent(String path){
+        if(driver.findElements(By.xpath(path)).size()>0){   //самый простой способ проверки, без необходимости ловить Exception.
+                                                            // Учитывая что есть метод, который на каждый Exception делает скрин - не вижу смысла в лишних обработках
+            return true;
+        }
+        return false;
+    }
+
+    public void insertIntoInput(WebElement input, String value)throws SkipException
     {
         String valueCheck ="";
         int timeout = 31;

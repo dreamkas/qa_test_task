@@ -10,12 +10,26 @@ public class MainMenuPage extends BasePage {
     public MainMenuPage(WebDriver driver) {
         super(driver);
     }
+
+    private String userButtonPath = "//*[@id='lk-page']/div/div[1]/md-menu/button/div[2]";
     @FindBy(xpath = "//*[@id='lk-page']/div/div[1]/md-menu/button/div[2]")
     private WebElement userButton;
 
     public String getUserName(){
         wait20Seconds.until(ExpectedConditions.visibilityOf(userButton));
         return userButton.getText();
+    }
+
+    public boolean isMainPage(){
+        return isWebElementPresent(userButtonPath);
+    }
+
+    @FindBy(xpath = "//md-menu-item/a")
+    private WebElement profileButton;
+
+    public void openUserProfile(){
+        wait20Seconds.until(ExpectedConditions.visibilityOf(userButton)).click();
+        wait20Seconds.until(ExpectedConditions.visibilityOf(profileButton)).click();
     }
 
     @FindBy(xpath = "//*[@id=\"lk-page\"]/div/div[2]/md-sidenav/div[1]/a[3]/div/span")
@@ -25,13 +39,16 @@ public class MainMenuPage extends BasePage {
        wait20Seconds.until(ExpectedConditions.elementToBeClickable(productsPage)).click();
     }
 
+    @FindBy(xpath = "//md-sidenav/div[1]/a[2]/div/span")
+    private WebElement cashboxMenu;
 
-
-    @FindBy(xpath = "//*[@id=\"tour_products_fab\"]/md-fab-speed-dial/md-fab-trigger/button")
-    private WebElement addProductButton;
-
-    public void addProduct(){
-        wait20Seconds.until(ExpectedConditions.elementToBeClickable(addProductButton)).click();
+    public void openCashboxMenu(){
+        wait20Seconds.until(ExpectedConditions.elementToBeClickable(cashboxMenu)).click();
     }
+
+
+
+
+
 
 }

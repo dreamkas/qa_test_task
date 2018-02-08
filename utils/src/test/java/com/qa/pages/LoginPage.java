@@ -31,4 +31,13 @@ public class LoginPage extends BasePage {
         insertIntoInput(passInput, pass);
         loginButton.click();
     }
+
+    @FindBy(xpath = "//md-input-container[3]/div/div")
+    private WebElement wrongLoginText;
+
+    public String getWrongLoginText(){
+        return wait20Seconds.until(ExpectedConditions.visibilityOf(wrongLoginText)).getText();
+    }
+
+
 }
